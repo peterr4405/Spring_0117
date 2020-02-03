@@ -5,13 +5,16 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Controller
+@EnableWebMvc
 @RequestMapping("/hello")
 public class HelloController {
 
@@ -113,6 +116,13 @@ public class HelloController {
     public String addMap(Model model, @RequestParam Map<String, Object> map) {
         System.out.println(map);
         model.addAttribute("name", map);
+        return "hello";
+    }
+    
+        // 新版 @RequestMapping 搭配 @EnableWebMvc
+    @GetMapping("/test/method")
+    public String testMethod(Model model) {
+        model.addAttribute("name", "method test");
         return "hello";
     }
 

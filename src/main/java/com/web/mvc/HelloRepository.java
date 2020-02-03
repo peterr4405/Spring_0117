@@ -12,7 +12,6 @@ public class HelloRepository {
     private static List<User> users = new Vector<>();
 
     public User getUser(Integer id) {
-
         return users.stream().filter(u -> u.getNum().getId().equals(id)).iterator().next();
     }
 
@@ -34,6 +33,7 @@ public class HelloRepository {
 
     public void removeUser(Integer id) {
         User user = users.stream().filter(u -> u.getNum().getId().equals(id)).findFirst().get();
+        //User user = getUser(id);
         if (user != null) {
             users.remove(user);
         }
