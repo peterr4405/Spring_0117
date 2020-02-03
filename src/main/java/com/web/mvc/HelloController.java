@@ -1,5 +1,8 @@
 package com.web.mvc;
 
+import com.web.beans.User;
+import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/hello")
 public class HelloController {
+
+    @Autowired
+    HelloRepository hr;
 
     @RequestMapping("/hi")
     @ResponseBody
@@ -65,6 +71,48 @@ public class HelloController {
     @RequestMapping(value = "/testParam")
     public String testParam(Model model, @RequestParam("name") String name) {
         model.addAttribute("name", name);
+        return "hello";
+    }
+
+    @RequestMapping("/user/add")
+    public String addUser(Model model, User user) {
+        hr.addUser(user);
+        model.addAttribute("name", user);
+        return "hello";
+    }
+
+    @RequestMapping("/user/query")
+    public String queryUser(Model model) {
+        model.addAttribute("name", hr.queryUsers());
+        return "hello";
+    }
+    
+    @RequestMapping("/user/get/{id}")
+    public String getUser(Model model, @PathVariable Integer id) {
+        model.addAttribute("name", hr.getUser(id));
+        return "hello";
+    }
+    
+    @RequestMapping("/user/update/{id}")
+    public String updateUser(Model model, @PathVariable Integer id,User user) {
+        hr.updateUser(id, user);
+        model.addAttribute("name", hr.getUser(id));
+        return "hello";
+    }
+    
+    @RequestMapping("/user/remove/{id}")
+    public String removeUser(Model model, @PathVariable Integer id) {
+        User user = hr.getUser(id);
+        hr.removeUser(id);
+        model.addAttribute("name", hr.queryUsers());
+        return "hello";
+    }   
+    
+        // 利用 Map 容器收集資料
+    @RequestMapping("/map/add") // ../map/add?name=John&age=18
+    public String addMap(Model model, @RequestParam Map<String, Object> map) {
+        System.out.println(map);
+        model.addAttribute("name", map);
         return "hello";
     }
 
