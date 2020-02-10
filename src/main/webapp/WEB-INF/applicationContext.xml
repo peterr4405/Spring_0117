@@ -17,11 +17,28 @@
           
     <context:component-scan base-package="com.web.mvc.controller"/>
     <context:component-scan base-package="com.web.mvc.repository"/>
-    
-        <!-- 視圖解析器 -->
+    <context:component-scan base-package="com.web.mvc.validate"/>
+
+        
+    <!-- 視圖解析器 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/jsp/"/>
         <property name="suffix" value=".jsp"/> 
     </bean>
     
- </beans>
+    <!-- 自定converter與formatter -->
+    <bean id="conversionService" 
+          class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="formatters">
+            <set> <!-- 透過@註釋配置 --></set>
+        </property>
+    </bean>
+    <mvc:annotation-driven conversion-service="conversionService" />
+
+    <bean id="messageSource"
+              class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename" value="/WEB-INF/resource/errorMessages" />
+    </bean>
+    
+    
+</beans>

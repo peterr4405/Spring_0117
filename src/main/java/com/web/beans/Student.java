@@ -1,11 +1,16 @@
 package com.web.beans;
 
+import java.util.Date;
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 public class Student {
     
     private Integer id;
     private String name;
     private Integer age;
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
+    private Date date;
 
     public Integer getId() {
         return id;
@@ -34,10 +39,16 @@ public class Student {
     public Student() {
     }
 
-    @Override
-    public String toString() {
-        return "Student{" + "id=" + id + ", name=" + name + ", age=" + age + '}';
+    public Date getDate() {
+        return date;
     }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+
+
     
     
     
