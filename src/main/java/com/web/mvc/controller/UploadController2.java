@@ -38,7 +38,6 @@ public class UploadController2 {
     @PostMapping("/uploadFile")
        public String submit(@ModelAttribute Photo photo, BindingResult result, @RequestParam("file") MultipartFile file, Model model) {
         photo.setBase64(getBase64(file));
-        System.out.println(photo.getBase64().length() + " : " + photo.getBase64());
         validator.validate(photo, result);
         if(result.hasErrors()) {
             model.addAttribute("list", list);
