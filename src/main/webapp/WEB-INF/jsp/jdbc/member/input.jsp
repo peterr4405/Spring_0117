@@ -10,6 +10,23 @@
         <title>Member</title>
     </head>
     <body style="padding: 15px">
+        <form:form modelAttribute="member" id="myform"  class="pure-form" method="post" action="${pageContext.request.getContextPath()}/mvc/jdbc/member/${action}">
+            <fieldset>
+                <legend>Member</legend>
+                ID：<form:input path="id" placeholder="ID" readonly="true"/><p />
+                Username：<form:input path="username" placeholder="Username" /><p />
+                Password：<form:input path="password" placeholder="Password" /><p />
+                Email：<form:input path="email" placeholder="Email" /><p />
+                Pass：<form:checkbox path="pass" placeholder="Pass" /><p />
+
+                Code：<form:input path="code" placeholder="Code" readonly="true" /><p />
+                Priority：
+                <form:input path="priority" placeholder="Priority" type="number"/>
+                <p />
+                
+                <button type="submit" class="pure-button pure-button-primary">${action}</button>
+            </fieldset>        
+        </form:form>
         <table>
             <td valign="top" style="padding: 10px">
                 <form:form modelAttribute="member" id="myform"  class="pure-form" method="post" action="${pageContext.request.getContextPath()}/mvc/jdbc/member/${action}">
@@ -17,7 +34,7 @@
                         <legend>Member</legend>
                         ID：<form:input path="id" placeholder="ID" readonly="true"/><p />
                         Username：<form:input path="username" placeholder="Username" /><p />
-                        Password：<form:password path="password" placeholder="Password" /><p />
+                        Password：<form:input path="password" placeholder="Password" /><p />
                         Email：<form:input path="email" placeholder="Email" /><p />
                         Pass：<form:checkbox path="pass" placeholder="Pass" /><p />
                         Pass Time：<form:input path="passts" placeholder="Pass Time" readonly="true" /><p />

@@ -39,12 +39,13 @@ public class MemberController {
     }
     
     @RequestMapping("/save")
+    @ResponseBody
     public String save(@ModelAttribute Member member) {
         String code = Integer.toHexString(member.hashCode());
         member.setCode(code);
         member.setPass(Boolean.FALSE);
         member.setPriority(1);
-        dao.save(member);
+        //dao.save(member);
         return "redirect:./input";
     }
     
